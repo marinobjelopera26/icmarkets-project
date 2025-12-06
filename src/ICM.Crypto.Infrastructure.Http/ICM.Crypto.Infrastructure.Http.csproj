@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <AssemblyName>ICM.Crypto.Infrastructure.Http</AssemblyName>
+        <RootNamespace>ICM.Crypto.Infrastructure.Http</RootNamespace>
+    </PropertyGroup>
+
 </Project>

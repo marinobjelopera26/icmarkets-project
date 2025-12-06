@@ -5,5 +5,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+    
+    <PropertyGroup>
+        <AssemblyName>ICM.Crypto.Application</AssemblyName>
+        <RootNamespace>ICM.Crypto.Application</RootNamespace>
+    </PropertyGroup>
 
 </Project>
