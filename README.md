@@ -1,2 +1,2 @@
-# icmarkets-project
-ICMarkets project for senior .NET developer job opening
+# ICMarkets Crypto Project
+ICMarkets project for senior .NET developer job advertisement.

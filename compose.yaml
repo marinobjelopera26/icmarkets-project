@@ -1,0 +1,7 @@
+﻿services:
+  icm.crypto.webapi:
+    image: icm.crypto.webapi
+    build:
+      context: .
+      dockerfile: src/ICM.Crypto.WebApi/Dockerfile
+
