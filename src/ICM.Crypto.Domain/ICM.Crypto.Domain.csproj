@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <AssemblyName>ICM.Crypto.Domain</AssemblyName>
+        <RootNamespace>ICM.Crypto.Domain</RootNamespace>
+    </PropertyGroup>
+    
 </Project>
