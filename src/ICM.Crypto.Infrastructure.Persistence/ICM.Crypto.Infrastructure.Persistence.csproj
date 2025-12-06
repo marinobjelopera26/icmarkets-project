@@ -5,5 +5,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+    
+    <PropertyGroup>
+        <AssemblyName>ICM.Crypto.Infrastructure.Persistence</AssemblyName>
+        <RootNamespace>ICM.Crypto.Infrastructure.Persistence</RootNamespace>
+    </PropertyGroup>
 
 </Project>
