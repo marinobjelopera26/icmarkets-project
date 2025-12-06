@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICM.Crypto.Application", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICM.Crypto.Domain", "src\ICM.Crypto.Domain\ICM.Crypto.Domain.csproj", "{2E746B1B-83FE-4901-BCFC-2E830025B666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICM.Crypto.Infrastructure.Http", "src\ICM.Crypto.Infrastructure.Http\ICM.Crypto.Infrastructure.Http.csproj", "{E20BD4E3-3A95-4C85-AFC7-18C862FDF3D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICM.Crypto.Infrastructure.BlockCypher", "src\ICM.Crypto.Infrastructure.BlockCypher\ICM.Crypto.Infrastructure.BlockCypher.csproj", "{E20BD4E3-3A95-4C85-AFC7-18C862FDF3D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICM.Crypto.Infrastructure.Persistence", "src\ICM.Crypto.Infrastructure.Persistence\ICM.Crypto.Infrastructure.Persistence.csproj", "{CFB728DA-87F8-4CF5-893F-CD45312C7B41}"
 EndProject
