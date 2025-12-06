@@ -47,7 +47,7 @@ builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwa
 builder.Services
     .AddApplication()
     .AddBlockCypher()
-    .AddPersistence();
+    .AddPersistence(builder.Configuration);
 
 var app = builder.Build();
 
