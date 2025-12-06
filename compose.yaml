@@ -1,7 +1,45 @@
 ﻿services:
+  icm.crypto.postgres:
+    image: postgres:16-alpine
+    container_name: icm-crypto-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: icm_crypto_snapshots
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d icm_crypto_snapshots"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: icm-crypto-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@icm.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      icm.crypto.postgres:
+        condition: service_healthy
+    
   icm.crypto.webapi:
     image: icm.crypto.webapi
     build:
       context: .
       dockerfile: src/ICM.Crypto.WebApi/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    depends_on:
+      icm.crypto.postgres:
+        condition: service_healthy
+        
+volumes:
+  pg_data: {}
 
