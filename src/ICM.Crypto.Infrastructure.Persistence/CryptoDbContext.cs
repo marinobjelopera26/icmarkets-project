@@ -12,6 +12,6 @@ public sealed class CryptoDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        // TODO: load entity configurations from assembly
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CryptoDbContext).Assembly);
     }
 }
