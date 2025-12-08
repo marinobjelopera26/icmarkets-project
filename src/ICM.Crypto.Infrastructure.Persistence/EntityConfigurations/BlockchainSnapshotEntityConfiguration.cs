@@ -32,7 +32,7 @@ internal sealed class BlockchainSnapshotEntityConfiguration
             .IsRequired()
             .HasMaxLength(20);
 
-        builder.Property(x => x.SourceUrl)
+        builder.Property(x => x.Source)
             .IsRequired()
             .HasMaxLength(256);
 
