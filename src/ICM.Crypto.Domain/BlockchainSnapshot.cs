@@ -10,7 +10,6 @@ public sealed class BlockchainSnapshot
         Blockchain blockchain,
         SourceUrl sourceUrl,
         HttpStatus httpStatus,
-        long durationMs,
         RawJson rawJson,
         SnapshotId? id = null)
         => new(
@@ -18,7 +17,6 @@ public sealed class BlockchainSnapshot
             blockchain,
             sourceUrl,
             httpStatus,
-            durationMs,
             rawJson,
             createdAtUtc: DateTime.UtcNow);
 
@@ -31,11 +29,9 @@ public sealed class BlockchainSnapshot
         Blockchain blockchain,
         SourceUrl sourceUrl,
         HttpStatus httpStatus,
-        long durationMs,
         RawJson rawJson,
         DateTime createdAtUtc)
     {
-        ArgumentOutOfRangeException.ThrowIfNegative(durationMs, nameof(durationMs));
         if (createdAtUtc.Kind != DateTimeKind.Utc)
             throw new ArgumentException("CreatedAtUtc must be a UTC date-time.", nameof(createdAtUtc));
 
@@ -43,7 +39,6 @@ public sealed class BlockchainSnapshot
         Blockchain = blockchain;
         SourceUrl = sourceUrl;
         HttpStatus = httpStatus;
-        DurationMs = durationMs;
         RawJson = rawJson;
         CreatedAtUtc = createdAtUtc;
     }
@@ -56,7 +51,6 @@ public sealed class BlockchainSnapshot
     public Blockchain Blockchain { get; }
     public SourceUrl SourceUrl { get; }
     public HttpStatus HttpStatus { get; }
-    public long DurationMs { get; }
     public RawJson RawJson { get; }
     public DateTime CreatedAtUtc { get; }
     

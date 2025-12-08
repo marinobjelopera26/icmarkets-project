@@ -10,5 +10,5 @@ internal interface IBlockCypherService
     /// <param name="descriptor">Blockchain type descriptor.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
     /// <returns></returns>
-    Task<BlockchainResponse> GetBlockchainInfoAsync(BlockchainDescriptor descriptor, CancellationToken cancellationToken = default);
+    Task<BlockchainResponse> GetBlockchainAsync(BlockchainDescriptor descriptor, CancellationToken cancellationToken = default);
 }

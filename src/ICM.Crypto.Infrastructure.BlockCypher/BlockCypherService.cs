@@ -1,5 +1,4 @@
 ﻿using ICM.Crypto.Application.Interfaces;
-using ICM.Crypto.Infrastructure.BlockCypher.Extensions;
 
 namespace ICM.Crypto.Infrastructure.BlockCypher;
 
@@ -12,7 +11,7 @@ internal sealed class BlockCypherService : IBlockCypherService
         _httpClient = httpHttpClient;
     }
     
-    public async Task<BlockchainResponse> GetBlockchainInfoAsync(BlockchainDescriptor descriptor, 
+    public async Task<BlockchainResponse> GetBlockchainAsync(BlockchainDescriptor descriptor, 
         CancellationToken cancellationToken = default)
     {
         var requestPath = CreateRequestPath();
@@ -25,7 +24,6 @@ internal sealed class BlockCypherService : IBlockCypherService
             descriptor.Coin.ToString("G"),
             descriptor.Chain.ToString("G"),
             HttpStatusCode: (int)response.StatusCode,
-            DurationMs: response.GetRequestDurationMs() ?? 0,
             RawJson: rawResponseBody);
 
         string CreateRequestPath()

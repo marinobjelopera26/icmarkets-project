@@ -13,14 +13,13 @@ internal sealed class BlockchainSnapshotProvider : IBlockchainSnapshotProvider
     
     public async Task<BlockchainSnapshotDto> GetSnapshotAsync(BlockchainDescriptor descriptor, CancellationToken cancellationToken = default)
     {
-        var response = await _blockCypherService.GetBlockchainInfoAsync(descriptor, cancellationToken);
+        var response = await _blockCypherService.GetBlockchainAsync(descriptor, cancellationToken);
 
         return new BlockchainSnapshotDto(
-            response.SourceUrl,
+            Source: Constants.BlockCypher,
             response.Coin,
             response.Chain,
             response.HttpStatusCode,
-            response.DurationMs,
             response.RawJson);
     }
 
@@ -28,18 +27,17 @@ internal sealed class BlockchainSnapshotProvider : IBlockchainSnapshotProvider
         IEnumerable<BlockchainDescriptor> descriptors, CancellationToken cancellationToken = default)
     {
         var tasks = descriptors
-            .Select(c => _blockCypherService.GetBlockchainInfoAsync(c, cancellationToken));
+            .Select(c => _blockCypherService.GetBlockchainAsync(c, cancellationToken));
 
         var results = await Task.WhenAll(tasks);
 
         return results
             .Select(r => 
                 new BlockchainSnapshotDto(
-                    r.SourceUrl,
+                    Source: Constants.BlockCypher,
                     r.Coin,
                     r.Chain,
                     r.HttpStatusCode,
-                    r.DurationMs,
                     r.RawJson))
             .ToArray();
     }

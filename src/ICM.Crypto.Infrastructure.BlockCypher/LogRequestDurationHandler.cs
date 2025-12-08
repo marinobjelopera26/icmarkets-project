@@ -3,11 +3,11 @@ using Microsoft.Extensions.Logging;
 
 namespace ICM.Crypto.Infrastructure.BlockCypher;
 
-public class RequestDurationDelegatingHandler : DelegatingHandler
+public class LogRequestDurationHandler : DelegatingHandler
 {
     private readonly ILogger _logger;
 
-    public RequestDurationDelegatingHandler(ILogger<RequestDurationDelegatingHandler> logger)
+    public LogRequestDurationHandler(ILogger<LogRequestDurationHandler> logger)
     {
         _logger = logger;
     }
@@ -20,10 +20,9 @@ public class RequestDurationDelegatingHandler : DelegatingHandler
 
         var requestDuration = stopwatch.ElapsedMilliseconds;
         
-        httpResponseMessage.Headers.Add("X-Client-Duration-Ms", requestDuration.ToString());
-        
-        _logger.LogInformation("HTTP request to '{RequestUrl}' finished after {RequestDuration}ms.",
-            httpResponseMessage.RequestMessage!.RequestUri,
+        _logger.LogInformation("HTTP {Method} '{RequestUrl}' finished after {RequestDuration}ms.",
+            request.Method.Method,
+            request.RequestUri,
             requestDuration);
         
         return httpResponseMessage;

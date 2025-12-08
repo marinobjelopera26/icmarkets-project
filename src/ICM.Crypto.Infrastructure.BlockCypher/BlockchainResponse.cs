@@ -5,5 +5,4 @@ internal sealed record BlockchainResponse(
     string Coin,
     string Chain,
     int HttpStatusCode,
-    long DurationMs,
     string RawJson);
