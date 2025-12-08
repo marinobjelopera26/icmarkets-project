@@ -5,6 +5,7 @@ using ICM.Crypto.Infrastructure.BlockCypher;
 using ICM.Crypto.Infrastructure.Persistence;
 using ICM.Crypto.WebApi.Logging;
 using ICM.Crypto.WebApi.Swagger;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -50,6 +51,12 @@ builder.Services
     .AddPersistence(builder.Configuration);
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<CryptoDbContext>();
+    await db.Database.MigrateAsync();
+}
 
 app.UseSerilogRequestLogging();
 
