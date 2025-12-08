@@ -1,4 +1,4 @@
-﻿using ICM.Crypto.Application;
+﻿using ICM.Crypto.Application.Interfaces;
 
 namespace ICM.Crypto.Infrastructure.BlockCypher;
 

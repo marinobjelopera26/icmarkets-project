@@ -1,6 +1,6 @@
 ﻿using ICM.Crypto.Domain.Enums;
 
-namespace ICM.Crypto.Application;
+namespace ICM.Crypto.Application.Interfaces;
 
 /// <summary>
 /// Describes the specific blockchain by defining the coin and the chain.
