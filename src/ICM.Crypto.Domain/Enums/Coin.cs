@@ -6,7 +6,7 @@
 public enum Coin
 {
     /// <summary>
-    /// BitCoin.
+    /// Bitcoin.
     /// </summary>
     Btc,
     
