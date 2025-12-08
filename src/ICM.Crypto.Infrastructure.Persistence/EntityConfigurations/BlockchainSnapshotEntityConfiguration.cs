@@ -39,9 +39,6 @@ internal sealed class BlockchainSnapshotEntityConfiguration
         builder.Property(x => x.HttpStatus)
             .IsRequired();
 
-        builder.Property(x => x.DurationMs)
-            .IsRequired();
-
         builder.Property(x => x.RawJson)
             .IsRequired()
             .HasColumnType("jsonb");
