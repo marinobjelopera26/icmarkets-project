@@ -9,11 +9,11 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+      <PackageReference Include="Microsoft.Extensions.Http" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\ICM.Crypto.Application\ICM.Crypto.Application.csproj" />
-      <ProjectReference Include="..\ICM.Crypto.Domain\ICM.Crypto.Domain.csproj" />
     </ItemGroup>
 
 </Project>
