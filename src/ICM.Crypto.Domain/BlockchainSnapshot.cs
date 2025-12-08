@@ -8,14 +8,14 @@ public sealed class BlockchainSnapshot
     
     public static BlockchainSnapshot Create(
         Blockchain blockchain,
-        SourceUrl sourceUrl,
+        Source source,
         HttpStatus httpStatus,
         RawJson rawJson,
         SnapshotId? id = null)
         => new(
             id ?? SnapshotId.CreateNew(),
             blockchain,
-            sourceUrl,
+            source,
             httpStatus,
             rawJson,
             createdAtUtc: DateTime.UtcNow);
@@ -27,7 +27,7 @@ public sealed class BlockchainSnapshot
     private BlockchainSnapshot(
         SnapshotId id,
         Blockchain blockchain,
-        SourceUrl sourceUrl,
+        Source source,
         HttpStatus httpStatus,
         RawJson rawJson,
         DateTime createdAtUtc)
@@ -37,7 +37,7 @@ public sealed class BlockchainSnapshot
 
         Id = id;
         Blockchain = blockchain;
-        SourceUrl = sourceUrl;
+        Source = source;
         HttpStatus = httpStatus;
         RawJson = rawJson;
         CreatedAtUtc = createdAtUtc;
@@ -49,7 +49,7 @@ public sealed class BlockchainSnapshot
     
     public SnapshotId Id { get; }
     public Blockchain Blockchain { get; }
-    public SourceUrl SourceUrl { get; }
+    public Source Source { get; }
     public HttpStatus HttpStatus { get; }
     public RawJson RawJson { get; }
     public DateTime CreatedAtUtc { get; }
