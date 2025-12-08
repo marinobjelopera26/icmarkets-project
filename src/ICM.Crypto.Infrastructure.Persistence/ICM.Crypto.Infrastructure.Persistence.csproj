@@ -23,7 +23,6 @@
     
     <ItemGroup>
       <ProjectReference Include="..\ICM.Crypto.Application\ICM.Crypto.Application.csproj" />
-      <ProjectReference Include="..\ICM.Crypto.Domain\ICM.Crypto.Domain.csproj" />
     </ItemGroup>
 
 </Project>
