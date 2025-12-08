@@ -20,7 +20,6 @@ internal sealed class BlockCypherService : IBlockCypherService
         var rawResponseBody = await response.Content.ReadAsStringAsync(cancellationToken);
         
         return new BlockchainResponse(
-            SourceUrl: new Uri(_httpClient.BaseAddress!, requestPath).ToString(),
             descriptor.Coin.ToString("G"),
             descriptor.Chain.ToString("G"),
             HttpStatusCode: (int)response.StatusCode,
