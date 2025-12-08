@@ -6,7 +6,7 @@ internal sealed class BlockchainSnapshotEntity
     public string ChainKey { get; set; } = null!;
     public string Blockchain { get; set; } = null!;
     public string Network { get; set; } = null!;
-    public string SourceUrl { get; set; } = null!;
+    public string Source { get; set; } = null!;
     public string RawJson { get; set; } = null!;
     public int HttpStatus { get; set; }
     
