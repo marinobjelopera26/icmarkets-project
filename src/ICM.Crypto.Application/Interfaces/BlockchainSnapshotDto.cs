@@ -4,5 +4,4 @@ public sealed record BlockchainSnapshotDto(
     string Source,
     string Coin,
     string Chain,
-    string RawJson,
-    DateTimeOffset CreatedAtUtc);
+    string RawJson);
