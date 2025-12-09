@@ -19,25 +19,14 @@ internal sealed class BlockchainSnapshotEntityConfiguration
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)
             .ValueGeneratedNever();
-
-        builder.Property(x => x.ChainKey)
-            .IsRequired()
-            .HasMaxLength(50);
-
+        
         builder.Property(x => x.Blockchain)
-            .IsRequired()
-            .HasMaxLength(20);
-
-        builder.Property(x => x.Network)
             .IsRequired()
             .HasMaxLength(20);
 
         builder.Property(x => x.Source)
             .IsRequired()
             .HasMaxLength(256);
-
-        builder.Property(x => x.HttpStatus)
-            .IsRequired();
 
         builder.Property(x => x.RawJson)
             .IsRequired()
@@ -46,7 +35,7 @@ internal sealed class BlockchainSnapshotEntityConfiguration
         builder.Property(x => x.CreatedAtUtc)
             .IsRequired();
 
-        builder.HasIndex(x => new { x.ChainKey, x.CreatedAtUtc })
+        builder.HasIndex(x => new { x.Blockchain, x.CreatedAtUtc })
             .HasDatabaseName("ix_snapshots_chain_createdat");
 
         builder.HasIndex(x => x.RawJson)

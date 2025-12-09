@@ -1,8 +1,8 @@
 ﻿namespace ICM.Crypto.Application.Interfaces;
 
-public record BlockchainSnapshotDto(
+public sealed record BlockchainSnapshotDto(
     string Source,
     string Coin,
     string Chain,
-    int HttpStatusCode,
-    string RawJson);
+    string RawJson,
+    DateTimeOffset CreatedAtUtc);
