@@ -6,17 +6,14 @@ public sealed class BlockchainSnapshot
 {
     #region Factory Method
     
-    public static BlockchainSnapshot Create(
+    public static BlockchainSnapshot CreateNew(
         Blockchain blockchain,
         Source source,
-        HttpStatus httpStatus,
-        RawJson rawJson,
-        SnapshotId? id = null)
+        RawJson rawJson)
         => new(
-            id ?? SnapshotId.CreateNew(),
+            id: SnapshotId.CreateNew(),
             blockchain,
             source,
-            httpStatus,
             rawJson,
             createdAtUtc: DateTime.UtcNow);
 
@@ -28,7 +25,6 @@ public sealed class BlockchainSnapshot
         SnapshotId id,
         Blockchain blockchain,
         Source source,
-        HttpStatus httpStatus,
         RawJson rawJson,
         DateTime createdAtUtc)
     {
@@ -38,7 +34,6 @@ public sealed class BlockchainSnapshot
         Id = id;
         Blockchain = blockchain;
         Source = source;
-        HttpStatus = httpStatus;
         RawJson = rawJson;
         CreatedAtUtc = createdAtUtc;
     }
@@ -50,7 +45,6 @@ public sealed class BlockchainSnapshot
     public SnapshotId Id { get; }
     public Blockchain Blockchain { get; }
     public Source Source { get; }
-    public HttpStatus HttpStatus { get; }
     public RawJson RawJson { get; }
     public DateTime CreatedAtUtc { get; }
     

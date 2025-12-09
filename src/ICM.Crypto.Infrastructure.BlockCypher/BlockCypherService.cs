@@ -22,7 +22,6 @@ internal sealed class BlockCypherService : IBlockCypherService
         return new BlockchainResponse(
             descriptor.Coin.ToString("G"),
             descriptor.Chain.ToString("G"),
-            HttpStatusCode: (int)response.StatusCode,
             RawJson: rawResponseBody);
 
         string CreateRequestPath()
