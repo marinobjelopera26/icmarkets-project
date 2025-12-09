@@ -6,13 +6,12 @@ public sealed class BlockchainSnapshot
 {
     #region Factory Method
     
-    public static BlockchainSnapshot Create(
+    public static BlockchainSnapshot CreateNew(
         Blockchain blockchain,
         Source source,
-        RawJson rawJson,
-        SnapshotId? id = null)
+        RawJson rawJson)
         => new(
-            id ?? SnapshotId.CreateNew(),
+            id: SnapshotId.CreateNew(),
             blockchain,
             source,
             rawJson,
