@@ -19,7 +19,6 @@ internal sealed class BlockchainSnapshotProvider : IBlockchainSnapshotProvider
             Source: Constants.BlockCypher,
             response.Coin,
             response.Chain,
-            response.HttpStatusCode,
             response.RawJson);
     }
 
@@ -37,7 +36,6 @@ internal sealed class BlockchainSnapshotProvider : IBlockchainSnapshotProvider
                     Source: Constants.BlockCypher,
                     r.Coin,
                     r.Chain,
-                    r.HttpStatusCode,
                     r.RawJson))
             .ToArray();
     }
