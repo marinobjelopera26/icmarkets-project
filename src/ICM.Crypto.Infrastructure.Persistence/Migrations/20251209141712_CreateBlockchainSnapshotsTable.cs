@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ICM.Crypto.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class AddBlockchainSnapshots : Migration
+    public partial class CreateBlockchainSnapshotsTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,26 +16,20 @@ namespace ICM.Crypto.Infrastructure.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ChainKey = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Blockchain = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    Network = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    SourceUrl = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    Source = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     RawJson = table.Column<string>(type: "jsonb", nullable: false),
-                    HttpStatus = table.Column<int>(type: "integer", nullable: false),
-                    DurationMs = table.Column<int>(type: "integer", nullable: false),
                     CreatedAtUtc = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_blockchain_snapshots", x => x.Id);
-                    table.CheckConstraint("chk_snapshots_duration", "\"DurationMs\" >= 0");
-                    table.CheckConstraint("chk_snapshots_httpstatus", "\"HttpStatus\" >= 100 AND \"HttpStatus\" <= 599");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_snapshots_chain_createdat",
+                name: "ix_snapshots_blockchain_createdat",
                 table: "blockchain_snapshots",
-                columns: new[] { "ChainKey", "CreatedAtUtc" });
+                columns: new[] { "Blockchain", "CreatedAtUtc" });
 
             migrationBuilder.CreateIndex(
                 name: "ix_snapshots_rawjson_gin",

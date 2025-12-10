@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ICM.Crypto.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(CryptoDbContext))]
-    [Migration("20251209122018_ModifyBlockchainSnapshotsTable")]
-    partial class ModifyBlockchainSnapshotsTable
+    [Migration("20251209141712_CreateBlockchainSnapshotsTable")]
+    partial class CreateBlockchainSnapshotsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,14 +55,9 @@ namespace ICM.Crypto.Infrastructure.Persistence.Migrations
                     NpgsqlIndexBuilderExtensions.HasMethod(b.HasIndex("RawJson"), "gin");
 
                     b.HasIndex("Blockchain", "CreatedAtUtc")
-                        .HasDatabaseName("ix_snapshots_chain_createdat");
+                        .HasDatabaseName("ix_snapshots_blockchain_createdat");
 
-                    b.ToTable("blockchain_snapshots", null, t =>
-                        {
-                            t.HasCheckConstraint("chk_snapshots_duration", "\"DurationMs\" >= 0");
-
-                            t.HasCheckConstraint("chk_snapshots_httpstatus", "\"HttpStatus\" >= 100 AND \"HttpStatus\" <= 599");
-                        });
+                    b.ToTable("blockchain_snapshots", (string)null);
                 });
 #pragma warning restore 612, 618
         }
