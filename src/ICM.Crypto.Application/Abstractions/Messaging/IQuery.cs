@@ -1,4 +1,4 @@
-﻿namespace ICM.Crypto.SharedKernel.Mediator;
+﻿namespace ICM.Crypto.Application.Abstractions.Messaging;
 
 /// <summary>
 /// Represents a query that generates a result of  <typeparamref name="TResult"/> type.

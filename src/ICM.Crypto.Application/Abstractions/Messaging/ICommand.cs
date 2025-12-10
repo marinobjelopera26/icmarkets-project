@@ -1,4 +1,4 @@
-﻿namespace ICM.Crypto.SharedKernel.Mediator;
+﻿namespace ICM.Crypto.Application.Abstractions.Messaging;
 
 /// <summary>
 /// Represents a command that does not generate any result.

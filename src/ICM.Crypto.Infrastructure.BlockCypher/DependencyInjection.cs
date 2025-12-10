@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ICM.Crypto.Application.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http.Resilience;
 using Polly;
 
@@ -31,6 +32,8 @@ public static class DependencyInjection
                     });
                 });
 
+        services.AddSingleton<IBlockchainSnapshotProvider, BlockchainSnapshotProvider>();
+        
         return services;
     }
 }
