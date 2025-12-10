@@ -1,14 +1,12 @@
-﻿using ICM.Crypto.Application.Interfaces;
-
-namespace ICM.Crypto.Infrastructure.BlockCypher;
+﻿namespace ICM.Crypto.Infrastructure.BlockCypher;
 
 internal interface IBlockCypherService
 {
     /// <summary>
-    /// Retrieves information about a specific blockchain from the BlockCypher blockchain API. 
+    /// Retrieves information about a specific blockchain from BlockCypher Blockchain API. 
     /// </summary>
-    /// <param name="descriptor">Blockchain type descriptor.</param>
-    /// <param name="cancellationToken"><see cref="CancellationToken"/></param>
+    /// <param name="request">Request DTO.</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/>.</param>
     /// <returns></returns>
-    Task<BlockchainResponse> GetBlockchainAsync(BlockchainDescriptor descriptor, CancellationToken cancellationToken = default);
+    Task<BlockchainResponse> GetBlockchainAsync(GetBlockchainRequestDto request, CancellationToken cancellationToken = default);
 }

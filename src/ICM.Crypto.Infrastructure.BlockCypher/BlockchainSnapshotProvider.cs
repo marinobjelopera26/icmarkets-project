@@ -1,4 +1,5 @@
 ﻿using ICM.Crypto.Application.Interfaces;
+using ICM.Crypto.Domain.ValueObjects;
 
 namespace ICM.Crypto.Infrastructure.BlockCypher;
 
@@ -11,32 +12,19 @@ internal sealed class BlockchainSnapshotProvider : IBlockchainSnapshotProvider
         _blockCypherService = blockCypherService;
     }
     
-    public async Task<BlockchainSnapshotDto> GetSnapshotAsync(BlockchainDescriptor descriptor, CancellationToken cancellationToken = default)
+    public async Task<BlockchainSnapshotDto> GetSnapshotAsync(
+        Blockchain blockchain, CancellationToken cancellationToken = default)
     {
-        var response = await _blockCypherService.GetBlockchainAsync(descriptor, cancellationToken);
+        var request = new GetBlockchainRequestDto(
+            blockchain.Coin.ToString("G"),
+            blockchain.Chain.ToString("G"));
+        
+        var response = await _blockCypherService.GetBlockchainAsync(request, cancellationToken);
 
         return new BlockchainSnapshotDto(
             Source: Constants.BlockCypher,
             response.Coin,
             response.Chain,
             response.RawJson);
-    }
-
-    public async Task<IReadOnlyList<BlockchainSnapshotDto>> GetSnapshotsAsync(
-        IEnumerable<BlockchainDescriptor> descriptors, CancellationToken cancellationToken = default)
-    {
-        var tasks = descriptors
-            .Select(c => _blockCypherService.GetBlockchainAsync(c, cancellationToken));
-
-        var results = await Task.WhenAll(tasks);
-
-        return results
-            .Select(r => 
-                new BlockchainSnapshotDto(
-                    Source: Constants.BlockCypher,
-                    r.Coin,
-                    r.Chain,
-                    r.RawJson))
-            .ToArray();
     }
 }

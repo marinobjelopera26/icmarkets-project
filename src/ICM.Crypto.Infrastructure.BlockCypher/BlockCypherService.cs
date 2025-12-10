@@ -1,6 +1,4 @@
-﻿using ICM.Crypto.Application.Interfaces;
-
-namespace ICM.Crypto.Infrastructure.BlockCypher;
+﻿namespace ICM.Crypto.Infrastructure.BlockCypher;
 
 internal sealed class BlockCypherService : IBlockCypherService
 {
@@ -11,24 +9,15 @@ internal sealed class BlockCypherService : IBlockCypherService
         _httpClient = httpHttpClient;
     }
     
-    public async Task<BlockchainResponse> GetBlockchainAsync(BlockchainDescriptor descriptor, 
-        CancellationToken cancellationToken = default)
+    public async Task<BlockchainResponse> GetBlockchainAsync(
+        GetBlockchainRequestDto request, CancellationToken cancellationToken = default)
     {
-        var requestPath = CreateRequestPath();
-
-        using var response = await _httpClient.GetAsync(requestPath, HttpCompletionOption.ResponseContentRead, cancellationToken);
+        using var response = await _httpClient.GetAsync(request.RequestPath, HttpCompletionOption.ResponseContentRead, cancellationToken);
         var rawResponseBody = await response.Content.ReadAsStringAsync(cancellationToken);
         
         return new BlockchainResponse(
-            descriptor.Coin.ToString("G"),
-            descriptor.Chain.ToString("G"),
+            request.Coin,
+            request.Chain,
             RawJson: rawResponseBody);
-
-        string CreateRequestPath()
-        {
-            return descriptor.Coin.ToString().ToLowerInvariant() + 
-                   '/' + 
-                   descriptor.Chain.ToString().ToLowerInvariant();
-        }
     }
 }
