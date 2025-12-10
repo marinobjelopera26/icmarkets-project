@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ICM.Crypto.Application.Interfaces;
+using ICM.Crypto.Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,7 +19,10 @@ public static class DependencyInjection
             {
                 npgsql.MigrationsAssembly(typeof(CryptoDbContext).Assembly.FullName);
             });
-        });
+        }, contextLifetime: ServiceLifetime.Scoped);
+
+        services.AddScoped<IBlockchainSnapshotWriteRepository, BlockchainSnapshotWriteRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
