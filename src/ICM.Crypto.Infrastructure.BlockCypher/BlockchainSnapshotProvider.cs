@@ -27,4 +27,23 @@ internal sealed class BlockchainSnapshotProvider : IBlockchainSnapshotProvider
             response.Chain,
             response.RawJson);
     }
+
+    public async Task<IReadOnlyCollection<BlockchainSnapshotDto>> GetSnapshotsAsync(
+        IEnumerable<Blockchain> blockchains, CancellationToken cancellationToken = default)
+    {
+        var tasks = blockchains
+            .Select(bc => GetSnapshotAsync(bc, cancellationToken));
+
+        var responses = await Task.WhenAll(tasks);
+        
+        return responses
+            .Select(r => 
+                new BlockchainSnapshotDto(
+                    r.Source, 
+                    r.Coin, 
+                    r.Chain, 
+                    r.RawJson))
+            .ToList()
+            .AsReadOnly();
+    }
 }
