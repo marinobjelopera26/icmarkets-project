@@ -1,4 +1,4 @@
-﻿namespace ICM.Crypto.Application.Abstractions.Messaging;
+﻿namespace ICM.Crypto.SharedKernel.Mediator;
 
 /// <summary>
 /// Represents a query handler that handles the <typeparamref name="TQuery"/> query
