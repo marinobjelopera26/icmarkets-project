@@ -9,12 +9,7 @@ internal sealed class BlockchainSnapshotEntityConfiguration
 {
     public void Configure(EntityTypeBuilder<BlockchainSnapshotEntity> builder)
     {
-        builder.ToTable("blockchain_snapshots", tableBuilder =>
-        {
-            tableBuilder.HasCheckConstraint("chk_snapshots_httpstatus",
-                "\"HttpStatus\" >= 100 AND \"HttpStatus\" <= 599");
-            tableBuilder.HasCheckConstraint("chk_snapshots_duration", "\"DurationMs\" >= 0");
-        });
+        builder.ToTable("blockchain_snapshots");
 
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)
@@ -36,7 +31,7 @@ internal sealed class BlockchainSnapshotEntityConfiguration
             .IsRequired();
 
         builder.HasIndex(x => new { x.Blockchain, x.CreatedAtUtc })
-            .HasDatabaseName("ix_snapshots_chain_createdat");
+            .HasDatabaseName("ix_snapshots_blockchain_createdat");
 
         builder.HasIndex(x => x.RawJson)
             .HasMethod("gin")
