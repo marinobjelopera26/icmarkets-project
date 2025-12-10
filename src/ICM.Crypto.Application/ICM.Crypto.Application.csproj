@@ -17,6 +17,7 @@
     
     <ItemGroup>
       <ProjectReference Include="..\ICM.Crypto.Domain\ICM.Crypto.Domain.csproj" />
+      <ProjectReference Include="..\ICM.Crypto.SharedKernel\ICM.Crypto.SharedKernel.csproj" />
     </ItemGroup>
 
 </Project>

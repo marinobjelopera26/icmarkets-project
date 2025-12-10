@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICM.Crypto.FunctionalTests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICM.Crypto.IntegrationTests", "tests\ICM.Crypto.IntegrationTests\ICM.Crypto.IntegrationTests.csproj", "{3B16D5AF-C448-495B-A9AF-A7A48263F513}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICM.Crypto.SharedKernel", "src\ICM.Crypto.SharedKernel\ICM.Crypto.SharedKernel.csproj", "{6DF47BA3-4D37-4038-B053-A1371B647961}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{3B16D5AF-C448-495B-A9AF-A7A48263F513}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B16D5AF-C448-495B-A9AF-A7A48263F513}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B16D5AF-C448-495B-A9AF-A7A48263F513}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DF47BA3-4D37-4038-B053-A1371B647961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DF47BA3-4D37-4038-B053-A1371B647961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DF47BA3-4D37-4038-B053-A1371B647961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DF47BA3-4D37-4038-B053-A1371B647961}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C820AAC5-908E-4279-8EBF-B4900E6DF562} = {CC8F1ABA-C941-4B2B-9762-2E88E9D36E80}
