@@ -13,6 +13,7 @@ public sealed class BlockchainDataIngestionController : ControllerBase
 {
     [HttpPost]
     [MapToApiVersion(ApiVersions.V1_0)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> PostAsync(
         [FromBody] IngestBlockchainDataRequest request,
         [FromServices] ICommandHandler<IngestSnapshotsCommand> handler,
