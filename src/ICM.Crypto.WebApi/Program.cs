@@ -30,7 +30,6 @@ builder.Services
 
         options.ApiVersionReader = ApiVersionReader.Combine(
             new UrlSegmentApiVersionReader(),
-            new QueryStringApiVersionReader("apiVersion"),
             new HeaderApiVersionReader("X-Api-Version"));
     })
     .AddApiExplorer(options =>
