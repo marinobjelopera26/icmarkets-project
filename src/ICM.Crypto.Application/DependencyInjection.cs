@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
 ﻿using FluentValidation;
+using ICM.Crypto.Application.Behaviors;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +14,7 @@ public static class DependencyInjection
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+            config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
         });
         
         return services;
