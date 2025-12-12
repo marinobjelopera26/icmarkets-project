@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using ICM.Crypto.Application;
@@ -7,7 +8,9 @@ using ICM.Crypto.Infrastructure.Persistence;
 using ICM.Crypto.WebApi.Logging;
 using ICM.Crypto.WebApi.Middleware;
 using ICM.Crypto.WebApi.Swagger;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -22,7 +25,13 @@ Log.Logger = SerilogLoggerConfiguration
 builder.Host.UseSerilog(Log.Logger, dispose: true);
 
 builder.Services.AddExceptionHandler<DefaultExceptionHandler>();
-builder.Services.AddControllers();
+
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    });
 
 builder.Services.AddCors(options =>
 {
@@ -43,6 +52,15 @@ builder.Services.AddCors(options =>
             .SetPreflightMaxAge(TimeSpan.FromMinutes(30));
     });
 });
+
+builder.Services
+    .AddHealthChecks()
+    .AddCheck("self", () => HealthCheckResult.Healthy("Healthy"), tags: ["liveness"])
+    .AddNpgSql(
+        builder.Configuration.GetConnectionString("Default") 
+            ?? throw new InvalidOperationException("Missing connection string"),
+        name: "postgres",
+        tags: ["readiness"]);
 
 builder.Services
     .AddApiVersioning(options =>
@@ -109,6 +127,15 @@ app.UseCors("DefaultPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+// Health endpoints
+app.MapHealthChecks("/health");
+app.MapHealthChecks("/health/ready", new HealthCheckOptions
+{
+    Predicate = r => r.Tags.Contains("readiness")
+});
+
 
 try
 {
