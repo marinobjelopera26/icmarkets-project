@@ -4,7 +4,7 @@ namespace ICM.Crypto.Domain;
 
 public sealed class BlockchainSnapshot
 {
-    #region Factory Method
+    #region Factory Methods
     
     public static BlockchainSnapshot CreateNew(
         Blockchain blockchain,
@@ -16,6 +16,16 @@ public sealed class BlockchainSnapshot
             source,
             rawJson,
             createdAtUtc: DateTime.UtcNow);
+
+    public static BlockchainSnapshot FromExisting(
+        SnapshotId id,
+        Blockchain blockchain,
+        Source source,
+        RawJson rawJson,
+        DateTime createdAtUtc)
+    {
+        return new BlockchainSnapshot(id, blockchain, source, rawJson, createdAtUtc);
+    }
 
     #endregion
     

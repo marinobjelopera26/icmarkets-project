@@ -8,13 +8,11 @@ namespace ICM.Crypto.Infrastructure.Persistence;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddPersistence(
-        this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Default");
-
         services.AddDbContext<CryptoDbContext>(options =>
         {
+            var connectionString = configuration.GetConnectionString("Default");
             options.UseNpgsql(connectionString, npgsql =>
             {
                 npgsql.MigrationsAssembly(typeof(CryptoDbContext).Assembly.FullName);
@@ -22,8 +20,9 @@ public static class DependencyInjection
         }, contextLifetime: ServiceLifetime.Scoped);
 
         services.AddScoped<IBlockchainSnapshotWriteRepository, BlockchainSnapshotWriteRepository>();
+        services.AddScoped<IBlockchainSnapshotReadRepository, BlockchainSnapshotReadRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+        
         return services;
     }
 }
