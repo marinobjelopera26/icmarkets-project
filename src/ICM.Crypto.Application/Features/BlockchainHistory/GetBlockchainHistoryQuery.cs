@@ -1,5 +1,4 @@
-﻿using ICM.Crypto.Domain.ValueObjects;
-using MediatR;
+﻿using MediatR;
 
 namespace ICM.Crypto.Application.Features.BlockchainHistory;
 
