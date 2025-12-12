@@ -1,5 +1,4 @@
-﻿using System.Runtime.Serialization;
-using ICM.Crypto.Application.Abstractions.Messaging;
+﻿using MediatR;
 
 namespace ICM.Crypto.Application.Features.DataIngestion;
 
@@ -9,4 +8,4 @@ namespace ICM.Crypto.Application.Features.DataIngestion;
 /// <param name="Feeds">
 /// Configure for which feeds (blockchains) the snapshots shall be ingested.
 /// </param>
-public sealed record IngestSnapshotsCommand(IngestionFeeds Feeds) : ICommand;
+public sealed record IngestSnapshotsCommand(IngestionFeeds Feeds) : IRequest;

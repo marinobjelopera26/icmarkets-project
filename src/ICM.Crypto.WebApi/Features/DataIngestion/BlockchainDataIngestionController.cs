@@ -1,7 +1,7 @@
 ﻿using Asp.Versioning;
-using ICM.Crypto.Application.Abstractions.Messaging;
 using ICM.Crypto.Application.Features.DataIngestion;
 using ICM.Crypto.WebApi.Versioning;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ICM.Crypto.WebApi.Features.DataIngestion;
@@ -16,12 +16,12 @@ public sealed class BlockchainDataIngestionController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> PostAsync(
         [FromBody] IngestBlockchainDataRequest request,
-        [FromServices] ICommandHandler<IngestSnapshotsCommand> handler,
+        [FromServices] ISender mediator,
         CancellationToken cancellationToken)
     {
         var command = new IngestSnapshotsCommand(request.Blockchains);
         
-        await handler.HandleAsync(command, cancellationToken);
+        await mediator.Send(command, cancellationToken);
 
         return Ok("Successfully ingested blockchain snapshot data.");
     }

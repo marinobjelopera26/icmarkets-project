@@ -12,9 +12,9 @@
     </PropertyGroup>
     
     <ItemGroup>
+      <PackageReference Include="MediatR" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
-      <PackageReference Include="Scrutor" />
     </ItemGroup>
     
     <ItemGroup>

@@ -1,13 +1,13 @@
-﻿using ICM.Crypto.Application.Abstractions.Messaging;
-using ICM.Crypto.Application.Interfaces;
+﻿using ICM.Crypto.Application.Interfaces;
 using ICM.Crypto.Domain;
 using ICM.Crypto.Domain.Helpers;
 using ICM.Crypto.Domain.ValueObjects;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace ICM.Crypto.Application.Features.DataIngestion;
 
-internal sealed class IngestSnapshotsCommandHandler : ICommandHandler<IngestSnapshotsCommand>
+internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnapshotsCommand>
 {
     private readonly IBlockchainSnapshotProvider _provider;
     private readonly IBlockchainSnapshotWriteRepository _writeRepository;
@@ -26,7 +26,7 @@ internal sealed class IngestSnapshotsCommandHandler : ICommandHandler<IngestSnap
         _logger = logger;
     }
 
-    public async Task HandleAsync(IngestSnapshotsCommand command, CancellationToken cancellationToken = default)
+    public async Task Handle(IngestSnapshotsCommand command, CancellationToken cancellationToken = default)
     {
         IReadOnlyCollection<BlockchainSnapshotDto> latestSnapshots;
         try
