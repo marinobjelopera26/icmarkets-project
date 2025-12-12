@@ -5,20 +5,22 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <AssemblyName>ICM.Crypto.Application</AssemblyName>
         <RootNamespace>ICM.Crypto.Application</RootNamespace>
     </PropertyGroup>
-    
+
     <ItemGroup>
-      <PackageReference Include="MediatR" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
-      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+        <PackageReference Include="FluentValidation"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions"/>
+        <PackageReference Include="MediatR"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\ICM.Crypto.Domain\ICM.Crypto.Domain.csproj" />
+        <ProjectReference Include="..\ICM.Crypto.Domain\ICM.Crypto.Domain.csproj"/>
     </ItemGroup>
 
 </Project>
