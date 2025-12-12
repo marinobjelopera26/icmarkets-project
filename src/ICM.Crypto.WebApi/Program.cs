@@ -2,6 +2,7 @@ using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using ICM.Crypto.Application;
 using ICM.Crypto.Infrastructure.BlockCypher;
+using ICM.Crypto.Infrastructure.HostedServices;
 using ICM.Crypto.Infrastructure.Persistence;
 using ICM.Crypto.WebApi.Logging;
 using ICM.Crypto.WebApi.Swagger;
@@ -47,7 +48,8 @@ builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwa
 builder.Services
     .AddApplication()
     .AddBlockCypher()
-    .AddPersistence(builder.Configuration);
+    .AddPersistence(builder.Configuration)
+    .AddDataIngestionHostedService(builder.Configuration);
 
 var app = builder.Build();
 
