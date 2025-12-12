@@ -5,6 +5,7 @@ using ICM.Crypto.Infrastructure.BlockCypher;
 using ICM.Crypto.Infrastructure.HostedServices;
 using ICM.Crypto.Infrastructure.Persistence;
 using ICM.Crypto.WebApi.Logging;
+using ICM.Crypto.WebApi.Middleware;
 using ICM.Crypto.WebApi.Swagger;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -20,6 +21,7 @@ Log.Logger = SerilogLoggerConfiguration
 
 builder.Host.UseSerilog(Log.Logger, dispose: true);
 
+builder.Services.AddExceptionHandler<DefaultExceptionHandler>();
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
@@ -78,6 +80,8 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<CryptoDbContext>();
     await db.Database.MigrateAsync();
 }
+
+app.UseExceptionHandler("/Error");
 
 app.UseSerilogRequestLogging();
 

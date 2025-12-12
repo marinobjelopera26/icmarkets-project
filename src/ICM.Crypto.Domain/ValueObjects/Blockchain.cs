@@ -39,7 +39,7 @@ public sealed record Blockchain
                 if (chain == Chain.Test3 && coin != Coin.Btc)
                 {
                     throw new InvalidCoinChainCombinationException(
-                        $"Network '{chain:G}' is only valid for '{Coin.Btc:G}");
+                        $"Chain '{chain:G}' is only valid for '{Coin.Btc:G}");
                 }
             }
         }
