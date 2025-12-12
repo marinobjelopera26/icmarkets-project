@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using ICM.Crypto.Application;
@@ -24,7 +25,13 @@ Log.Logger = SerilogLoggerConfiguration
 builder.Host.UseSerilog(Log.Logger, dispose: true);
 
 builder.Services.AddExceptionHandler<DefaultExceptionHandler>();
-builder.Services.AddControllers();
+
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    });
 
 builder.Services.AddCors(options =>
 {
