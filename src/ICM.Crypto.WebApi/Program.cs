@@ -22,6 +22,26 @@ builder.Host.UseSerilog(Log.Logger, dispose: true);
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    var allowedOrigins = builder.Configuration
+        .GetSection("Cors:AllowedOrigins")
+        .Get<string[]>() ?? [];
+    
+    var allowedMethods = builder.Configuration
+        .GetSection("Cors:AllowedMethods")
+        .Get<string[]>() ?? [];
+    
+    options.AddPolicy("DefaultPolicy", policy =>
+    {
+        policy
+            .WithOrigins(allowedOrigins)
+            .WithMethods(allowedMethods)
+            .AllowAnyHeader()
+            .SetPreflightMaxAge(TimeSpan.FromMinutes(30));
+    });
+});
+
 builder.Services
     .AddApiVersioning(options =>
     {
@@ -79,6 +99,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("DefaultPolicy");
 
 app.UseAuthorization();
 
