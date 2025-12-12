@@ -67,6 +67,7 @@ internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnap
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to persist the ingested blockchain data.");
+            throw;
         }
     }
 
