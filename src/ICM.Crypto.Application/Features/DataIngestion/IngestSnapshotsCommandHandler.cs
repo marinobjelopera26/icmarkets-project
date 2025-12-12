@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ICM.Crypto.Application.Features.DataIngestion;
 
-internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnapshotsCommand>
+internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnapshotsCommand, Unit>
 {
     private readonly IBlockchainSnapshotProvider _provider;
     private readonly IBlockchainSnapshotWriteRepository _writeRepository;
@@ -26,7 +26,7 @@ internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnap
         _logger = logger;
     }
 
-    public async Task Handle(IngestSnapshotsCommand command, CancellationToken cancellationToken = default)
+    public async Task<Unit> Handle(IngestSnapshotsCommand command, CancellationToken cancellationToken = default)
     {
         IReadOnlyCollection<BlockchainSnapshotDto> latestSnapshots;
         try
@@ -37,7 +37,7 @@ internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnap
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to retrieve latest blockchain snapshots from the provider.");
-            return;
+            throw;
         }
 
         foreach (var snapshot in latestSnapshots)
@@ -56,6 +56,7 @@ internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnap
             {
                 _logger.LogError(ex, "Failed to create aggregate or persist a blockchain snapshot for {Coin}-{Chain}",
                     snapshot.Coin, snapshot.Chain);
+                throw;
             }
         }
 
@@ -63,6 +64,8 @@ internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnap
         {
             await _unitOfWork.SaveChangesAsync(cancellationToken);
             _logger.LogInformation("Blockchain data ingestion completed successfully.");
+            
+            return Unit.Value;
         }
         catch (Exception ex)
         {

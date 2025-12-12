@@ -8,4 +8,4 @@ namespace ICM.Crypto.Application.Features.DataIngestion;
 /// <param name="Feeds">
 /// Configure for which feeds (blockchains) the snapshots shall be ingested.
 /// </param>
-public sealed record IngestSnapshotsCommand(IngestionFeeds Feeds) : IRequest;
+public sealed record IngestSnapshotsCommand(IngestionFeeds Feeds) : IRequest<Unit>;
