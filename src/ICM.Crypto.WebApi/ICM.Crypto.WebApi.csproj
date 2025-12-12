@@ -43,6 +43,7 @@
     <ItemGroup>
         <ProjectReference Include="..\ICM.Crypto.Application\ICM.Crypto.Application.csproj"/>
         <ProjectReference Include="..\ICM.Crypto.Infrastructure.BlockCypher\ICM.Crypto.Infrastructure.BlockCypher.csproj"/>
+        <ProjectReference Include="..\ICM.Crypto.Infrastructure.HostedServices\ICM.Crypto.Infrastructure.HostedServices.csproj" />
         <ProjectReference Include="..\ICM.Crypto.Infrastructure.Persistence\ICM.Crypto.Infrastructure.Persistence.csproj"/>
     </ItemGroup>
 

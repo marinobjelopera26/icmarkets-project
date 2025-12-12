@@ -22,8 +22,9 @@ public sealed class BlockchainDataIngestionController : ControllerBase
     [MapToApiVersion(ApiVersions.V1_0)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> PostAsync(
-        [FromBody] IngestSnapshotsCommand command, CancellationToken cancellationToken)
+        [FromBody] IngestBlockchainDataRequest request, CancellationToken cancellationToken)
     {
+        var command = new IngestSnapshotsCommand(request.Blockchains);
         await _mediator.Send(command, cancellationToken);
 
         return Ok("Successfully ingested blockchain snapshot data.");

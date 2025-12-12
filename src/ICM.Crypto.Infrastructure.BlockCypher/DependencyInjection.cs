@@ -1,4 +1,5 @@
-﻿using ICM.Crypto.Application.Interfaces;
+﻿using System.Net;
+using ICM.Crypto.Application.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http.Resilience;
 using Polly;
@@ -27,8 +28,17 @@ public static class DependencyInjection
                     {
                         BackoffType = DelayBackoffType.Exponential,
                         MaxRetryAttempts = 3,
-                        Delay = TimeSpan.FromSeconds(2),
-                        UseJitter = true
+                        Delay = TimeSpan.FromSeconds(1),
+                        UseJitter = true,
+                        ShouldHandle = args => 
+                            args.Outcome switch
+                            {  
+                                { Exception: HttpRequestException } => PredicateResult.True(),
+                                { Result.StatusCode: HttpStatusCode.TooManyRequests } => PredicateResult.False(),
+                                { Result.StatusCode: HttpStatusCode.RequestTimeout } => PredicateResult.True(),
+                                { Result.StatusCode: >= HttpStatusCode.InternalServerError } => PredicateResult.True(),
+                                _ => PredicateResult.False()
+                            }
                     });
                 });
 
