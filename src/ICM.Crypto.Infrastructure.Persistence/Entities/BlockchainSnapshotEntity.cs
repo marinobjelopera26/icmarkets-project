@@ -10,5 +10,5 @@ internal sealed class BlockchainSnapshotEntity
     /// <summary>
     /// NOTE: Mapped to timestamptz column type in Postgres.
     /// </summary>
-    public DateTimeOffset CreatedAtUtc { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
 }
