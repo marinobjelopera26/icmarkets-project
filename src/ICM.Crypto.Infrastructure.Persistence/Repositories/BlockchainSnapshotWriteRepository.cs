@@ -21,7 +21,7 @@ internal sealed class BlockchainSnapshotWriteRepository : IBlockchainSnapshotWri
             Blockchain = snapshot.Blockchain.ToString(),
             Source = snapshot.Source.Value,
             RawJson = snapshot.RawJson.Value,
-            CreatedAtUtc = snapshot.CreatedAtUtc,
+            CreatedAt = snapshot.CreatedAtUtc,
         };
 
         await _dbContext

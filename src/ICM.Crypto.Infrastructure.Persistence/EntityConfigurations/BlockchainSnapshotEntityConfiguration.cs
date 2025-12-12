@@ -27,10 +27,10 @@ internal sealed class BlockchainSnapshotEntityConfiguration
             .IsRequired()
             .HasColumnType("jsonb");
 
-        builder.Property(x => x.CreatedAtUtc)
+        builder.Property(x => x.CreatedAt)
             .IsRequired();
 
-        builder.HasIndex(x => new { x.Blockchain, x.CreatedAtUtc })
+        builder.HasIndex(x => new { x.Blockchain, CreatedAtUtc = x.CreatedAt })
             .HasDatabaseName("ix_snapshots_blockchain_createdat");
 
         builder.HasIndex(x => x.RawJson)
