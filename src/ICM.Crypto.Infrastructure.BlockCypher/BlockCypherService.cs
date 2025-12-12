@@ -13,6 +13,8 @@ internal sealed class BlockCypherService : IBlockCypherService
         GetBlockchainRequestDto request, CancellationToken cancellationToken = default)
     {
         using var response = await _httpClient.GetAsync(request.RequestPath, HttpCompletionOption.ResponseContentRead, cancellationToken);
+        response.EnsureSuccessStatusCode();
+        
         var rawResponseBody = await response.Content.ReadAsStringAsync(cancellationToken);
         
         return new BlockchainResponse(
