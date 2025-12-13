@@ -27,4 +27,12 @@ public interface IBlockchainSnapshotReadRepository
     /// <param name="blockchain"><see cref="Blockchain"/>.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken"/>.</param>
     Task<int> GetTotalCountAsync(Blockchain blockchain, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Retrieves the latest stored snapshot from the backing store for the
+    /// provided <paramref name="blockchain"/>.
+    /// </summary>
+    /// <param name="blockchain"><see cref="Blockchain"/>,</param>
+    /// <param name="cancellationToken"><see cref="CancellationToken"/>.</param>
+    Task<BlockchainSnapshot> GetLatestSnapshotAsync(Blockchain blockchain, CancellationToken cancellationToken);
 }

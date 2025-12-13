@@ -1,7 +1,5 @@
 ﻿using Asp.Versioning;
-using FluentValidation;
 using ICM.Crypto.Application.Features.BlockchainHistory;
-using ICM.Crypto.Domain.ValueObjects;
 using ICM.Crypto.WebApi.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

@@ -32,7 +32,7 @@ internal sealed class BlockchainSnapshotReadRepository : IBlockchainSnapshotRead
         var entities = await query.ToListAsync(cancellationToken);
 
         return entities
-            .Select(entity => 
+            .Select(entity =>
                 BlockchainSnapshot.FromExisting(
                     SnapshotId.FromExisting(entity.Id),
                     blockchain,
@@ -40,12 +40,28 @@ internal sealed class BlockchainSnapshotReadRepository : IBlockchainSnapshotRead
                     RawJson.Create(entity.RawJson),
                     entity.CreatedAt.UtcDateTime));
     }
-    
+
     public Task<int> GetTotalCountAsync(Blockchain blockchain, CancellationToken cancellationToken = default)
     {
         return _dbContext
             .Set<BlockchainSnapshotEntity>()
             .Where(s => s.Blockchain == blockchain.ToString())
             .CountAsync(cancellationToken);
+    }
+
+    public async Task<BlockchainSnapshot> GetLatestSnapshotAsync(Blockchain blockchain,
+        CancellationToken cancellationToken)
+    {
+        var entity = await _dbContext
+            .Set<BlockchainSnapshotEntity>()
+            .OrderByDescending(s => s.CreatedAt)
+            .FirstAsync(cancellationToken);
+        
+        return BlockchainSnapshot.FromExisting(
+            SnapshotId.FromExisting(entity.Id),
+            blockchain,
+            Source.Create(entity.Source),
+            RawJson.Create(entity.RawJson),
+            entity.CreatedAt.UtcDateTime);
     }
 }
