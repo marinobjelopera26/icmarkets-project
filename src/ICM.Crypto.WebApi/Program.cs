@@ -9,7 +9,6 @@ using ICM.Crypto.WebApi.Logging;
 using ICM.Crypto.WebApi.Middleware;
 using ICM.Crypto.WebApi.Swagger;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Serilog;
@@ -37,7 +36,7 @@ builder.Services.AddCors(options =>
 {
     var allowedOrigins = builder.Configuration
         .GetSection("Cors:AllowedOrigins")
-        .Get<string[]>() ?? [];
+        .Get<string[]>() ?? ["*"];
     
     var allowedMethods = builder.Configuration
         .GetSection("Cors:AllowedMethods")
@@ -96,7 +95,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<CryptoDbContext>();
-    await db.Database.MigrateAsync();
+    await db.Database.EnsureCreatedAsync();
 }
 
 app.UseExceptionHandler("/Error");

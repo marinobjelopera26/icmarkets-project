@@ -49,8 +49,7 @@ internal sealed class DefaultExceptionHandler : IExceptionHandler
         httpContext.Response.StatusCode = statusCode;
         httpContext.Response.ContentType = "application/json";
         
-        await httpContext.Response.WriteAsync(
-            JsonSerializer.Serialize(problemDetails), cancellationToken);
+        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 
         return true;
     }

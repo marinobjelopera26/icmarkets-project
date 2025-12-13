@@ -54,24 +54,6 @@ public sealed record Blockchain
 
             return From(parsedCoin, parsedChain);
         }
-
-        public Blockchain FromIdentifier(string identifier, string delimiter = DefaultDelimiter)
-        {
-            var chain = Chain.Main; // default to the 'main' chain
-
-            var identifierParts = identifier.Split(delimiter);
-            if (!Enum.TryParse<Coin>(identifierParts[0], ignoreCase: true, out var coin))
-                throw new InvalidCoinIdentifierException($"Invalid coin identifier: '{identifierParts[0]}'.");
-
-            // skip if chain identifier is not provided and default to the 'main' chain
-            if (identifierParts.Length == 2 &&
-                !Enum.TryParse(identifierParts[1], ignoreCase: true, out chain))
-            {
-                throw new InvalidChainIdentifierException($"Invalid chain identifier: '{identifierParts[1]}'.");
-            }
-
-            return From(coin, chain);
-        }
     }
 
     #endregion

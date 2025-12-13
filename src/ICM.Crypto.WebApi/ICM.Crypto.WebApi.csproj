@@ -11,6 +11,10 @@
         <AssemblyName>ICM.Crypto.WebApi</AssemblyName>
         <RootNamespace>ICM.Crypto.WebApi</RootNamespace>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="ICM.Crypto.FunctionalTests"/>
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Mvc"/>
