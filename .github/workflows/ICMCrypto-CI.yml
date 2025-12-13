@@ -53,14 +53,12 @@ jobs:
           tags: |
             marinobjelopera26/icm:integration
           push: true
+          load: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
       - name: Run Integration Tests [Release]
-        run: dotnet test tests/ICM.Crypto.IntegrationTests/ICM.Crypto.IntegrationTests.csproj \
-                --configuration Release \
-                --no-build \
-                --verbosity normal
+        run: dotnet test tests/ICM.Crypto.IntegrationTests/ICM.Crypto.IntegrationTests.csproj --configuration Release --no-build --verbosity normal
 
       - name: Run Functional Tests [Release]
         run: dotnet test tests/ICM.Crypto.FunctionalTests/ICM.Crypto.FunctionalTests.csproj --no-build --configuration Release --verbosity normal

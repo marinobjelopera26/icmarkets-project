@@ -22,4 +22,22 @@ internal sealed class SmokeTests
         var responseBody =  await response.Content.ReadAsStringAsync();
         Assert.That(responseBody, Is.EqualTo("Healthy"));
     }
+    
+    [Test]
+    public async Task VerifyWebApiIsReadyToAcceptTraffic()
+    {
+        // Arrange
+        var client = new HttpClient
+        {
+            BaseAddress = new Uri(TestEnvironment.ApiBaseUrl)
+        };
+
+        // Act
+        var response = await client.GetAsync("/health/ready");
+        
+        // Assert
+        response.EnsureSuccessStatusCode();
+        var responseBody =  await response.Content.ReadAsStringAsync();
+        Assert.That(responseBody, Is.EqualTo("Healthy"));
+    }
 }
