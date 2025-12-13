@@ -37,7 +37,7 @@ builder.Services.AddCors(options =>
 {
     var allowedOrigins = builder.Configuration
         .GetSection("Cors:AllowedOrigins")
-        .Get<string[]>() ?? [];
+        .Get<string[]>() ?? ["*"];
     
     var allowedMethods = builder.Configuration
         .GetSection("Cors:AllowedMethods")
