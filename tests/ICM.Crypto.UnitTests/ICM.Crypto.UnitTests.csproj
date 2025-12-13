@@ -4,7 +4,8 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-
+        <AssemblyName>ICM.Crypto.UnitTests</AssemblyName>
+        <RootNamespace>ICM.Crypto.UnitTests</RootNamespace>
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
     </PropertyGroup>
@@ -12,13 +13,22 @@
     <ItemGroup>
         <PackageReference Include="coverlet.collector"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+        <PackageReference Include="NSubstitute" />
         <PackageReference Include="NUnit"/>
-        <PackageReference Include="NUnit.Analyzers"/>
+        <PackageReference Include="NUnit.Analyzers">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="NUnit3TestAdapter"/>
     </ItemGroup>
 
     <ItemGroup>
         <Using Include="NUnit.Framework"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\ICM.Crypto.Domain\ICM.Crypto.Domain.csproj"/>
+        <ProjectReference Include="..\..\src\ICM.Crypto.Application\ICM.Crypto.Application.csproj"/>
     </ItemGroup>
 
 </Project>

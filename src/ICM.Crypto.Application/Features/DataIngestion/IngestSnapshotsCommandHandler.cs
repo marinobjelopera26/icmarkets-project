@@ -40,6 +40,12 @@ internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnap
             throw;
         }
 
+        if (latestSnapshots.Count == 0)
+        {
+            _logger.LogInformation("Provider did not return any snapshots");
+            return Unit.Value;
+        }
+
         foreach (var snapshot in latestSnapshots)
         {
             try
@@ -56,7 +62,6 @@ internal sealed class IngestSnapshotsCommandHandler : IRequestHandler<IngestSnap
             {
                 _logger.LogError(ex, "Failed to create aggregate or persist a blockchain snapshot for {Coin}-{Chain}",
                     snapshot.Coin, snapshot.Chain);
-                throw;
             }
         }
 

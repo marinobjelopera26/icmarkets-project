@@ -22,5 +22,10 @@
     <ItemGroup>
         <ProjectReference Include="..\ICM.Crypto.Domain\ICM.Crypto.Domain.csproj"/>
     </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="ICM.Crypto.UnitTests"/>
+        <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
+    </ItemGroup>
 
 </Project>
