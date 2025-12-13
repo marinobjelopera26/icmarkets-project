@@ -42,9 +42,12 @@ public class IntegrationTestFixture
             .Build();
 
         await _pgContainer.StartAsync();
+
+        var image = Environment.GetEnvironmentVariable("API_IMAGE")
+                    ?? "marinobjelopera26/icm-blockchain-api:integration";
         
         _apiContainer = new ContainerBuilder()
-            .WithImage("gchr.io/marinobjelopera26/icm/blockchain.api:integration")
+            .WithImage(image)
             .WithNetwork(_network)
             .WithNetworkAliases("webapi")
             .WithEnvironment("ASPNETCORE_URLS", $"http://0.0.0.0:{ApiPort}")
