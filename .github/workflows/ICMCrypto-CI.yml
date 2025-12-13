@@ -51,7 +51,7 @@ jobs:
           context: .
           file: src/ICM.Crypto.WebApi/Dockerfile
           tags: |
-            icm-blockchain-api:integration
+            marinobjelopera26/icm:integration
           push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max

@@ -44,7 +44,7 @@ public class IntegrationTestFixture
         await _pgContainer.StartAsync();
 
         var image = Environment.GetEnvironmentVariable("API_IMAGE")
-                    ?? "marinobjelopera26/icm-blockchain-api:integration";
+                    ?? "marinobjelopera26/icm:integration";
         
         _apiContainer = new ContainerBuilder()
             .WithImage(image)
